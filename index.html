@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I’m Sorry 🖤</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top, #1f1f2e, #0b0b12);
+  color: #eee;
+}
+
+.card {
+  width: 92%;
+  max-width: 380px;
+  background: #141421;
+  border-radius: 22px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+}
+
+h1 {
+  color: #ff7aa2;
+  margin-bottom: 10px;
+}
+
+#typing {
+  min-height: 60px;
+  font-size: 14px;
+  color: #d6d6e0;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.note {
+  background: rgba(255,255,255,0.05);
+  margin: 6px 0;
+  padding: 10px;
+  border-radius: 14px;
+  font-size: 13px;
+  color: #cfcfe8;
+}
+
+.sticker {
+  width: 100%;
+  border-radius: 16px;
+  margin: 14px 0;
+  opacity: 0.9;
+}
+
+.question {
+  font-size: 18px;
+  margin: 18px 0;
+  color: #fff;
+}
+
+.buttons {
+  display: flex;
+  gap: 14px;
+}
+
+button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+#yesBtn {
+  background: #ff7aa2;
+  color: #111;
+}
+
+#noBtn {
+  background: #2a2a3d;
+  color: #eee;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+  <h1>Hey Sorry l🖤</h1>
+
+  <div id="typing"></div>
+
+  <div class="note"></div>
+  <div class="note"></div>
+  <div class="note"></div>
+
+  <img class="sticker"
+    src="Sorry.jpg"
+    alt="sorry">
+
+  <div class="question">I’m sorry… wanna forgive me?</div>
+
+  <div class="buttons" id="buttonBox">
+    <button id="yesBtn">Yes 🖤</button>
+    <button id="noBtn">No</button>
+  </div>
+</div>
+
+<script>
+/* AUTO-TYPING APOLOGY */
+const text =
+  "Ahhh....i know i have done the wrong things but instead of making it complicated lets fixx thiss";
+
+let index = 0;
+const speed = 40;
+const typingDiv = document.getElementById("typing");
+
+function typeText() {
+  if (index < text.length) {
+    typingDiv.textContent += text.charAt(index);
+    index++;
+    setTimeout(typeText, speed);
+  }
+}
+typeText();
+
+/* NO BUTTON LOGIC */
+let noClicks = 0;
+let swapped = false;
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const box = document.getElementById("buttonBox");
+
+noBtn.addEventListener("click", () => {
+  noClicks++;
+
+  if (noClicks === 1) {
+    noBtn.textContent = "Are you sure?";
+  } else if (noClicks === 2) {
+    noBtn.textContent = "Pakka?";
+  } else if (noClicks === 3) {
+    noBtn.textContent = "Soch lo ek aur baar";
+  } else {
+    swapButtons();
+  }
+});
+
+function swapButtons() {
+  if (!swapped) {
+    box.insertBefore(noBtn, yesBtn);
+  } else {
+    box.insertBefore(yesBtn, noBtn);
+  }
+  swapped = !swapped;
+}
+
+/* WHATSAPP REDIRECT */
+yesBtn.addEventListener("click", () => {
+  const phoneNumber = "918235042914"; // CHANGE THIS
+  const message = encodeURIComponent(
+    "yeaa its fine....lets fix this..🖐️"
+  );
+  window.location.href = `https://wa.me/${phoneNumber}?text=${message}`;
+});
+</script>
+
+</body>
+</html>
